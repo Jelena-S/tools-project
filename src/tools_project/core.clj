@@ -53,3 +53,26 @@
                                        ".green" text
                                        ".car-icons-holder .number-icon-1" text)))
 
+;namesti
+
+(defn formatting [x] 
+  (if (str/includes? (:name x) "Skoda")
+   (let [new-name (-> (:name x)
+                (str/replace "Skoda" "Škoda"))]
+    {:name new-name :url (:url x) :price (:price x)})
+
+    (if (str/includes? (:name x) "VW")
+      (let [new-name (-> (:name x)
+                    (str/replace "VW" "Volkswagen"))]
+        {:name new-name :url (:url x) :price (:price x)})
+      (if (str/includes? (:name x) "Golf")
+(let [new-name (-> (:name x)
+              (str/replace "Golf" "Volkswagen Golf"))]
+  {:name new-name :url (:url x) :price (:price x)})
+(let [new-name (-> (:name x))]
+{:name new-name :url (:url x) :price (:price x)})))))
+
+
+
+
+
