@@ -1,4 +1,4 @@
-(ns tools-project.core
+(ns tools-project.formattingdata
   (:require [clojure.string :as str]))
 
 (defn trim-name [x]
@@ -25,5 +25,13 @@
         (let [new-name (-> (:name x))]
           {:name new-name :url (:url x) :price (:price x)})))))
 
-(defn extract-agency-name [agency-name x]
+(defn i-dont-know [agency-name x]
   {:agency agency-name :name (:name x) :url (:url x) :price (:price x)})
+
+(defn  add-agency [agency-name cars]
+  (loop [cars cars
+         new-cars []]
+    (if (empty? cars)
+      new-cars
+      (let [x (first cars)]
+        (recur (rest cars) (conj new-cars {:agency agency-name :name (:name x) :url (:url x) :price (:price x)}))))))
