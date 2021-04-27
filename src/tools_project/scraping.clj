@@ -15,22 +15,25 @@
                                                        (:find-price element) text
                                                        (:find-details element) text))))
 ;url for ruting!!!!
-(def rent-agencies [{:agency "cars-grand-mobile"
+(def rent-agencies [{:agency "Rent a car Beograd GRAND MOBILE"
                 :url-for-scraping "https://rentacargrandmobile.com/iznajmljivanje-automobila-beograd"
+                     :part-link "https://rentacargrandmobile.com"
                 :element "div.listanje-vozila.flex.row div.col-sm-4.col-md-4.col-lg-3.vozilo.fadeIn"
                 :find-name ".text > a"
                 :find-url ".text > a"
                 :find-price ".price"
                 :find-details ".car-details .detail"}
-               {:agency "cars-agape"
+               {:agency "Rent a car Beograd AGAPE"
                 :url-for-scraping "https://rentacarbeograd.info/vozila/"
+                :part-link ""
                 :element "div.caption"
                 :find-name "h4.caption-title > a"
                 :find-url "td.buttons > a"
                 :find-price "h5.caption-title-sub"
                 :find-details "table.table"}
-                {:agency "cars-max"
+                {:agency "Rent a car Beograd MAX"
                  :url-for-scraping "https://renta-car-beograd.rs/iznajmljivanje-automobila-beograd"
+                 :part-link "https://renta-car-beograd.rs"
                  :element "div.listanje-vozila.flex.row div.col-sm-4.col-md-4.col-lg-3.vozilo.fadeIn"
                  :find-name ".text > a"
                  :find-url "a.btn.detaljno"

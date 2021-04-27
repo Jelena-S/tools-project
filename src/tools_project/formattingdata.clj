@@ -28,10 +28,22 @@
 (defn i-dont-know [agency-name x]
   {:agency agency-name :name (:name x) :url (:url x) :price (:price x)})
 
-(defn  add-agency [agency-name cars]
+(defn  add-agency-to-all [agency-name cars]
   (loop [cars cars
          new-cars []]
     (if (empty? cars)
       new-cars
       (let [x (first cars)]
         (recur (rest cars) (conj new-cars {:agency agency-name :name (:name x) :url (:url x) :price (:price x)}))))))
+
+;url for routing (part-link+url)
+;incorporate into extraction function or later when you have hashmaps
+(defn new-url [cars]
+  (loop [cars cars
+         new-cars []]
+    (if (empty? cars)
+      new-cars
+      (let [x (first cars)]
+        (let [new-url (-> (:url x)
+                          (str/replace (:url x) (clojure.core/str (:part-link x) (:url x))))]
+          (recur (rest cars) (conj new-cars {:name (:name x) :url new-url :price (:price x)})))))))
