@@ -43,11 +43,13 @@
   [db table items]
   (insert-multi! db table items))
 
-(defn find
+(defn findd
   [db table item]
   (find-by-keys db table item))
 
-(defn select
-  [db]
-  (query db [(str "select ...")]))
+(defn selectt
+  ([db]
+   (query db [(str "select c.*, a.name as agency_name, p.price as price, p.url_for_reservation as url from agency a join price p on a.id=p.agency_id join car c on p.car_id=c.id")]))
+  ([db carname]
+   (query db [(str "select c.*, a.name as agency_name, p.price as price, p.url_for_reservation as url from agency a join price p on a.id=p.agency_id join car c on p.car_id=c.id where c.name like '%" carname "%'")])))
 
