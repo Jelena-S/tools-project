@@ -47,3 +47,8 @@
         (let [new-url (-> (:url x)
                           (str/replace (:url x) (clojure.core/str (:part-link x) (:url x))))]
           (recur (rest cars) (conj new-cars {:name (:name x) :url new-url :price (:price x)})))))))
+
+(defn fix-car
+  [car]
+  (let [name (:name car)]
+    {:name name}))
