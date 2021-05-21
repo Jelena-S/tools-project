@@ -1,26 +1,36 @@
 (ns tools-project.scraping
-  (:require [reaver :refer [parse extract-from text attr select]]
-            [clojure.string :as str]
-            [clojure.set :as set]
+  (:require [reaver :refer [parse extract-from text attr]]
             [tools-project.formattingdata :as format-data]
-            [tools-project.db :refer [db insert-one-in-db insert-multi-in-db find]]))
+            [tools-project.db :refer [db insert-one-in-db insert-multi-in-db findd drop-all-tables create-db]]))
 
 ;trim needed in some agencies!!!!!
+(defn parse-slurping
+  [element]
+  (parse(slurp (:url-for-scraping element))))
+
 (defn extraction
   "extracting cars"
-  [url-for-scraping element]
-  (map format-data/formatting (sort-by str (extract-from (parse (slurp url-for-scraping)) (:element element)
-                                                         [:name :url :price :details]
-                                                         (:find-name element) text
-                                                         (:find-url element) (attr :href)
-                                                         (:find-price element) text)))) ;(:find-details element) text
+  [element]
+  (map format-data/formatting (sort-by str (extract-from (parse-slurping element) (:element element)
+                                                          [:name :url :price] ;:details
+                                                          (:find-name element) text
+                                                          (:find-url element) (attr :href)
+                                                          (:find-price element) text)))) ;(:find-details element) text
+
+(defn extraction-only
+  [element]
+  (extract-from (parse-slurping element) (:element element)
+                [:name :url :price] ;:details
+                (:find-name element) text
+                (:find-url element) (attr :href)
+                (:find-price element) text))
 
 (defn all-agencies
   [rent-agencies]
   (loop [rent-agencies rent-agencies agencies []]
     (if (empty? rent-agencies) agencies
         (let [[agency & remain] rent-agencies]
-          (recur remain (conj agencies {:name (agency :name)}))))))
+          (recur remain (conj agencies {:name (agency :agency) :link (agency :part-link)})))))) ;link?
 
 
 (defn insert-cars-and-prices
@@ -31,8 +41,8 @@
               url (:url car)
               price (:price car)
               car-for-db (format-data/fix-car car)
-              id (or (:id (first (find db "car" car-for-db)))
-                     (get (first (insert-one-in-db db "car" car-for-db)) (keyword "last_id()")))]
+              id (or (:id (first (findd db "car" car-for-db)))
+                     (get (first (insert-one-in-db db "car" car-for-db)) (keyword "last_insert_rowid()")))]
           (recur remain (conj prices {:agency_id agency :car_id id :price price :url_for_reservation url}))))))
 
 
@@ -40,9 +50,9 @@
 
 (defn cars-per-agency
   [agency]
-  (let [a (first (find db "agency" {:name (:name agency)}))
-        cars (set (extraction (:url-for-scraping agency)(:element agency)))]
-    (insert-cars-and-prices cars (:id a))))
+  (let [a (first (findd db "agency" {:name (:agency agency)})) ;
+        cars (set (extraction  agency))] ;(:element agency)
+    (insert-cars-and-prices cars (:id a)))) 
 
 (defn scraping-all-agencies
   [rent-agencies]
@@ -73,3 +83,12 @@
                      :find-name ".text > a"
                      :find-url "a.btn.detaljno"
                      :find-price ".price"}]) ;:find-details ".car-details .detail"
+
+(defn start
+  []
+  (drop-all-tables db [:price :car :agency])
+  (create-db db)
+  (insert-multi-in-db db "agency" (all-agencies rent-agencies))
+  (scraping-all-agencies rent-agencies))
+
+(start)
