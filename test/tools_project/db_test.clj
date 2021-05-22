@@ -1,7 +1,7 @@
 (ns tools-project.db-test
   (:require [clojure.test :refer [deftest testing is use-fixtures]]
             [tools-project.db :refer [create-db insert-one-in-db insert-multi-in-db findd]]
-            [clojure.java.jdbc  :refer [db-do-commands create-table-ddl insert! insert-multi! find-by-keys query drop-table-ddl query] ]))
+            [clojure.java.jdbc  :refer [db-do-commands drop-table-ddl query] ]))
 
 (def db_test
   {:classname "org.sqlite.JDBC"

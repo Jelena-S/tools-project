@@ -1,5 +1,5 @@
 (ns tools-project.formattingdata-test
-  (:require [clojure.test :refer [deftest testing is use-fixtures]]
+  (:require [clojure.test :refer [deftest testing is]]
             [tools-project.formattingdata :refer [formatting fix-price]]))
 
 (deftest test-formatting

@@ -22,7 +22,7 @@
     [:p (str "Go to search page and enter car name. When you click on search button, results will be shown. If you leave car name empty, all cars will be shown with their prices.")]]))
 
 (def columns
-  [:id :name  ]) ;:price :url_for_reservation
+  [:id :name  ]) 
 
 (def all-columns-all
   [:id :name :grand :agape :max])

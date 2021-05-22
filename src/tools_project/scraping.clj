@@ -3,7 +3,7 @@
             [tools-project.formattingdata :as format-data]
             [tools-project.db :refer [db insert-one-in-db insert-multi-in-db findd drop-all-tables create-db]]))
 
-;trim needed in some agencies!!!!!
+
 (defn parse-slurping
   [element]
   (parse(slurp (:url-for-scraping element))))
@@ -61,7 +61,7 @@
         (let [[agency & remain] rent-agencies]
           (recur remain (into agencies (cars-per-agency agency)))))))
 
-;url for ruting!!!!
+
 (def rent-agencies [{:agency "GRAND MOBILE"
                      :url-for-scraping "https://rentacargrandmobile.com/iznajmljivanje-automobila-beograd"
                      :part-link "https://rentacargrandmobile.com"

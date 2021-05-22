@@ -6,7 +6,7 @@
                      (first))]
     {:name new-name :url (:url x) :price (:price x)}))
 
-;namesti
+
 
 (defn formatting [x]
   (if (str/includes? (:name x) "Skoda")
@@ -25,19 +25,11 @@
         (let [new-name (-> (:name x))]
           {:name new-name :url (:url x) :price (:price x)})))))
 
-(defn i-dont-know [agency-name x]
-  {:agency agency-name :name (:name x) :url (:url x) :price (:price x)})
 
-(defn  add-agency-to-all [agency-name cars]
-  (loop [cars cars
-         new-cars []]
-    (if (empty? cars)
-      new-cars
-      (let [x (first cars)]
-        (recur (rest cars) (conj new-cars {:agency agency-name :name (:name x) :url (:url x) :price (:price x)}))))))
 
-;url for routing (part-link+url)
-;incorporate into extraction function or later when you have hashmaps
+
+
+
 (defn new-url [cars]
   (loop [cars cars
          new-cars []]
