@@ -7,7 +7,7 @@ This is simple application for comparing renting prices of cars for several rent
 * Search page contains form where you enter car name. By clicking you submit your choice and result will be shown. You can directly go to the site and see details and make reservation or get back to searching. If you submit empty car name, all car prices will be shown.
 
 ### Model
-![model](https://raw.githubusercontent.com/Jelena-S/tools-project/master/resources/public/pictures/model-alati.PNG?token=ANO4OGVWMXFKYTGEYQC3NXTAVEMGQ)
+![model](https://github.com/Jelena-S/tools-project/blob/master/resources/public/pictures/model-alati.PNG?raw=true)
 
 ## Libraries used
 
