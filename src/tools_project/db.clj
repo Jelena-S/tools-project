@@ -1,5 +1,5 @@
 (ns tools-project.db
-  (:require [clojure.java.jdbc :refer [db-do-commands create-table-ddl insert! insert-multi! find-by-keys query drop-table-ddl]]));navedi sta treba
+  (:require [clojure.java.jdbc :refer [db-do-commands create-table-ddl insert! insert-multi! find-by-keys query drop-table-ddl]]))
 
 (def db
   {:classname "org.sqlite.JDBC"
