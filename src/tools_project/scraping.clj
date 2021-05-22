@@ -39,7 +39,7 @@
     (if (empty? cars) (insert-multi-in-db db "price" (set prices))
         (let [[car & remain] cars
               url (str (:link agency) (:url car))
-              price (:price car)
+              price (format-data/fix-price (:price car))
               car-for-db (format-data/fix-car car)
               id (or (:id (first (findd db "car" car-for-db)))
                      (get (first (insert-one-in-db db "car" car-for-db)) (keyword "last_insert_rowid()")))]

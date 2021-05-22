@@ -52,3 +52,7 @@
   [car]
   (let [name (:name car)]
     {:name name}))
+
+(defn fix-price
+  [price]
+  (if (str/includes? price "/") (subs (first (str/split price #" / ")) 4) price))
