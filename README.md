@@ -1,4 +1,4 @@
-# tools-project
+# Simple price comparator for rent a car agencies
 
 ## About
 
