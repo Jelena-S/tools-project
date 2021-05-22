@@ -101,6 +101,7 @@
      [:hr]
      (if (empty? cars) [:h2 "No results found"]
          [:table
+          (include-css "../css/style.css")
           (all-columns columns)
           (for [id ids]
             (let [prices (filter #(= id (:id %)) cars)
