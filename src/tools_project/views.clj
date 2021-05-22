@@ -44,7 +44,10 @@
   (let [p (:price (first (filter #(= agency (:agency_name %)) cars)))]
     (if (nil? p) 0 p)))
 
-
+(defn return-url
+  [agency cars]
+(let [p (:url (first (filter #(= agency (:agency_name %)) cars)))]
+  (if (nil? p) 0 p)))
 
 (defn table-with-cars
   [cars columns]
@@ -53,7 +56,17 @@
     ;[:td [:input {:type "text" :name "name" :value (car c) :readonly true}]]
     ;[:td [:a {:href "https://rentacargrandmobile.com"}[:button (car c)]]]
     ;(if (= (car c) 0) [:td [:input {:type "text" :name "name" :value "/" :readonly true}]] [:td [:a {:href "https://rentacargrandmobile.com"} [:button (car c)]]])
-    (if (= (str c) ":id") [:td [:input {:type "text" :name "name" :value (:id car) :readonly true}]] (if (= (str c) ":name") [:td [:input {:type "text" :name "name" :value (:name car) :readonly true}]] (if (= (car c) 0) [:td [:input {:type "text" :name "name" :value "/" :readonly true}]] [:td [:a {:href "https://rentacargrandmobile.com"} [:button (car c)]]])))
+    (if (= (str c) ":id") 
+      [:td [:input {:type "text" :name "name" :value (:id car) :readonly true}]] 
+      (if (= (str c) ":name") 
+        [:td [:input {:type "text" :name "name" :value (:name car) :readonly true}]] 
+        (if (= (car c) 0) 
+          [:td [:input {:type "text" :name "name" :value "/" :readonly true}]] 
+          (if (= (str c) ":max")
+            [:td [:a {:href (car :max-url)} [:button (car c)]]]
+            (if (= (str c) ":agape")
+              [:td [:a {:href (car :agape-url)} [:button (car c)]]]
+              [:td [:a {:href (car :grand-url)} [:button (car c)]]])))))
 ))
 
 
@@ -85,6 +98,7 @@
     (html5
      [:a {:href "/search"} [:button  "<- Back to searching"]]
      [:h2 "Results for searching: " name]
+     [:h4 "Click on price button for details..."]
      [:hr]
      (if (empty? cars) [:h2 "No results found"]
          [:table
@@ -92,8 +106,11 @@
           (for [id ids]
             (let [prices (filter #(= id (:id %)) cars)
                   p (first prices)
-                  grand (return-price "Rent a car Beograd GRAND MOBILE" prices)
-                  agape (return-price "Rent a car Beograd AGAPE" prices)
-                  max (return-price "Rent a car Beograd MAX" prices)
-                  show (assoc p :grand grand :agape agape :max max)]
+                  grand (return-price "GRAND MOBILE" prices)
+                  agape (return-price "AGAPE" prices)
+                  max (return-price "MAX" prices)
+                  grand-url (return-url "GRAND MOBILE" prices)
+                  agape-url (return-url "AGAPE" prices)
+                  max-url (return-url "MAX" prices)
+                  show (assoc p :grand grand :agape agape :max max :grand-url grand-url :agape-url agape-url :max-url max-url)]
               (table-with-cars (vector show) all-columns-all)))]))))

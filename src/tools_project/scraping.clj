@@ -38,12 +38,12 @@
   (loop [cars cars prices []]
     (if (empty? cars) (insert-multi-in-db db "price" (set prices))
         (let [[car & remain] cars
-              url (:url car)
+              url (str (:link agency) (:url car))
               price (:price car)
               car-for-db (format-data/fix-car car)
               id (or (:id (first (findd db "car" car-for-db)))
                      (get (first (insert-one-in-db db "car" car-for-db)) (keyword "last_insert_rowid()")))]
-          (recur remain (conj prices {:agency_id agency :car_id id :price price :url_for_reservation url}))))))
+          (recur remain (conj prices {:agency_id (:id agency) :car_id id :price price :url_for_reservation url}))))))
 
 
 
@@ -52,7 +52,7 @@
   [agency]
   (let [a (first (findd db "agency" {:name (:agency agency)})) ;
         cars (set (extraction  agency))] ;(:element agency)
-    (insert-cars-and-prices cars (:id a)))) 
+    (insert-cars-and-prices cars a))) 
 
 (defn scraping-all-agencies
   [rent-agencies]
