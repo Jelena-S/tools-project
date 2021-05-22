@@ -51,7 +51,7 @@
 
 (defn table-with-cars
   [cars columns]
-  (for [car cars
+  [:tr (for [car cars
         c columns]
     ;[:td [:input {:type "text" :name "name" :value (car c) :readonly true}]]
     ;[:td [:a {:href "https://rentacargrandmobile.com"}[:button (car c)]]]
@@ -66,8 +66,7 @@
             [:td [:a {:href (car :max-url)} [:button (car c)]]]
             (if (= (str c) ":agape")
               [:td [:a {:href (car :agape-url)} [:button (car c)]]]
-              [:td [:a {:href (car :grand-url)} [:button (car c)]]])))))
-))
+              [:td [:a {:href (car :grand-url)} [:button (car c)]]]))))))])
 
 
 ;[:td [:input {:type "text" :name "name" :value (:name car) :readonly true}]]
