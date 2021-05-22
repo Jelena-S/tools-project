@@ -1,22 +1,37 @@
 # tools-project
 
-A Clojure library designed to ... well, that part is up to you.
+## About
 
-## Usage
+This is simple application for comparing renting prices of cars for several rent-a-car agencies. This application scrapes data from rent-a-car agencies, formats and stores extracted data in database. You can search for desired car and see compared prices. 
+* Home page contains short description of application.
+* Search page contains form where you enter car name. By clicking you submit your choice and result will be shown. You can directly go to the site and see details and make reservation or get back to searching. If you submit empty car name, all car prices will be shown.
 
-FIXME
+### Model
+
+
+## Libraries used
+
+* [Reaver] (https://github.com/mischov/reaver)
+* [java.jdbc] (https://github.com/clojure/java.jdbc)
+* [sqlite-jdbc] (https://github.com/xerial/sqlite-jdbc)
+* [Hiccup] (https://github.com/weavejester/hiccup)
+* [Ring] (https://github.com/ring-clojure/ring)
+* [Compojure] (https://github.com/weavejester/compojure)
+
+
+## Prerequisites
+
+You will need [Leiningen] (https://github.com/technomancy/leiningen) 2.0.0 or above installed.
+
+## Running
+
+To start a web server for the application navigate to tools-project and run: 
+```bash
+lein ring server
+```
 
 ## License
 
-Copyright © 2021 FIXME
+Eclipse Public License 2.0
 
-This program and the accompanying materials are made available under the
-terms of the Eclipse Public License 2.0 which is available at
-http://www.eclipse.org/legal/epl-2.0.
-
-This Source Code may also be made available under the following Secondary
-Licenses when the conditions for such availability set forth in the Eclipse
-Public License, v. 2.0 are satisfied: GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or (at your
-option) any later version, with the GNU Classpath Exception which is available
-at https://www.gnu.org/software/classpath/license.html.
+Copyright © 2021 Jelena Sreckovic
