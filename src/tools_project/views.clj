@@ -18,7 +18,8 @@
    [:div
     [:h1 (str "Welcome to the price comparating site!")]
     [:br]
-    [:h3 (str "Here you can find prices for several rent a car agencies and choose the cheapest one.")]]))
+    [:h3 (str "Here you can find prices for several rent a car agencies and choose the cheapest one.")]
+    [:p (str "Go to search page and enter car name. When you click on search button, results will be shown. If you leave car name empty, all cars will be shown with their prices.")]]))
 
 (def columns
   [:id :name  ]) ;:price :url_for_reservation
