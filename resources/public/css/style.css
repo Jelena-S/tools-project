@@ -1,0 +1,45 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    padding: 5px;
+    background-color:blue;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+  }
+
+  form {
+      margin-top: 20px;
+      margin-left: 20px;
+  }
+
+  table, td, th {
+    border: 3px solid black;
+  }
+  
+  table {
+    max-width: fit-content;
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 3px;
+  }
+
+ table input{
+   border: none;
+ }
+
+ td button {
+   align-items: center;
+ }
+
